@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--引入统一头-->
+<head th:include="import/head :: head"></head>
+<body>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>部门列表</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="col-sm-3">
+                        <span class="input-group-btn">
+                        <input type="button" class="btn btn-success" data-toggle="modal"
+                               data-target="#departmentModal"
+                               data-backdrop="static"
+                               onclick="openModal('/admin/department/toAdd','departmentModal')"
+                               value="新增部门"/>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-9"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="departmentModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<!--引入统一JS-->
+<script th:replace="import/script :: script"></script>
+</body>
+</html>
