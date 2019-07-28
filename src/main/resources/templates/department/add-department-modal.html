@@ -5,7 +5,7 @@
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">Close</span>
             </button>
-            <h4 class="modal-title">新增用户</h4>
+            <h4 class="modal-title">新增部门</h4>
         </div>
         <small class="font-bold">
             <div class="modal-body">
@@ -13,7 +13,7 @@
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
-                                <form id="add-car-form" method="post" class="form-horizontal" th:action="@{/admin/car/add}">
+                                <form id="add-department-form" method="post" class="form-horizontal" th:action="@{/admin/department/add}">
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">部门名称<span class="text-danger">*</span></label>
@@ -25,7 +25,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">职能描述<span class="text-danger">*</span></label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control"></textarea>
+                                            <textarea name="description" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -47,15 +47,13 @@
 <script>
     $(function () {
         //表单验证
-        $("#add-car-form").validate({
+        $("#add-department-form").validate({
             rules:{
-                license:"required",
-                brand:"required",
-                displacement:"required"
+                name:"required",
+                description:"required"
             },messages:{
-                license:"请输入车牌号",
-                brand:"请输入车辆品牌",
-                displacement:"请输入发动机排量"
+                name:"请输入部门名称",
+                description:"请输入部门描述"
             }
         });
     });

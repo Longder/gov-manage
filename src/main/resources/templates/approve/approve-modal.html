@@ -1,0 +1,103 @@
+<div class="modal-dialog modal-lg" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">审批详情</h4>
+        </div>
+        <small class="font-bold">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">申请详情</a></li>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">审批意见</a></li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="home">
+                                            <form id="approve-form" method="post" class="form-horizontal" th:action="@{/admin/approve/addOpinion}" style="margin-top: 30px;">
+                                                <input type="hidden" name="approveApplyId" th:value="${apply.id}"/>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">审批标题</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" readonly th:value="${apply.title}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">审批内容</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea readonly class="form-control" th:text="${apply.content}"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">审批文档</label>
+                                                    <div class="col-sm-10">
+                                                        <a class="btn btn-info btn-sm" th:href="${apply.filePath}">点击下载</a>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">填写审批意见</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea name="opinion" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4 col-sm-offset-2">
+                                                        <button class="btn btn-primary" type="submit">保存意见</button>
+                                                        <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="profile">
+                                            <h5>已填意见</h5>
+                                            <table class="table table-bordered table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>意见内容</th>
+                                                    <th>填写人</th>
+                                                    <th>填写时间</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="opinion:${opinionList}">
+                                                        <td th:text="${opinion.opinion}"></td>
+                                                        <td th:text="${opinion.approveUser.name}"></td>
+                                                        <td th:text="${opinion.fillTime}"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </small>
+    </div>
+</div>
+<script>
+    $(function () {
+        //表单验证
+        $("#approve-form").validate({
+            rules:{
+                opinion:"required"
+            },messages:{
+                opinion:"请填写审批意见"
+            }
+        });
+    });
+</script>

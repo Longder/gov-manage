@@ -43,6 +43,19 @@ public class SysUser extends BaseIdEntity implements UserDetails {
     private String gender;
 
     /**
+     * 角色，不持久化，vo dto用
+     */
+    @Transient
+    private SysRole role;
+
+    /**
+     * 所属部门
+     */
+    @ManyToOne
+    @JoinColumn(name = "dept_id_")
+    private Department department;
+
+    /**
      * 用户角色
      */
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "sysUser",cascade = CascadeType.ALL)

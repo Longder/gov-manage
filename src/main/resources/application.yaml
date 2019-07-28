@@ -17,3 +17,6 @@ logging:
 server:
   port: 5188
 
+system:
+  default-password: 1234  # 默认密码
+

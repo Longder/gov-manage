@@ -39,10 +39,16 @@
                         <span class="nav-label">部门管理</span>
                     </a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_USER')">
-                    <a class="J_menuItem" th:href="@{/admin/car/list}" title="我的车辆">
+                <li sec:authorize="hasRole('ROLE_LEADER')">
+                    <a class="J_menuItem" th:href="@{/admin/approve/listForDept}" title="部门审批">
                         <i class="fa fa-car"></i>
-                        <span class="nav-label">我的车辆</span>
+                        <span class="nav-label">部门审批</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                    <a class="J_menuItem" th:href="@{/admin/approve/listForEmp}" title="我的审批">
+                        <i class="fa fa-file-archive-o"></i>
+                        <span class="nav-label">我的审批</span>
                     </a>
                 </li>
             </ul>
