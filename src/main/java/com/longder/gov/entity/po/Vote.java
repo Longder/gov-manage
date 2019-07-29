@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 投票实体
@@ -35,4 +36,16 @@ public class Vote extends BaseIdEntity {
     @ManyToOne
     @JoinColumn(name = "dept_id_")
     private Department department;
+
+    /**
+     * 投票选项集合
+     */
+    @Transient
+    private List<String> opinions;
+
+    /**
+     * 投票选项详情
+     */
+    @Transient
+    private List<VoteDetail> voteDetailList;
 }

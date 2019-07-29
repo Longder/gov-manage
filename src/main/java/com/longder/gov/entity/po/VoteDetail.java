@@ -27,4 +27,9 @@ public class VoteDetail extends BaseIdEntity{
      */
     @Column(name = "memo_")
     private String memo;
+    /**
+     * 投票数
+     */
+    @Column(name = "count_")
+    private Integer count;
 }

@@ -82,6 +82,12 @@
                         <span class="nav-label">部门内部投票</span>
                     </a>
                 </li>
+                <li sec:authorize="hasRole('ROLE_LEADER')">
+                    <a class="J_menuItem" th:href="@{/admin/vote/list}" title="部门内部投票">
+                        <i class="fa fa-book"></i>
+                        <span class="nav-label">部门内部投票</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

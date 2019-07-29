@@ -1,0 +1,109 @@
+<div class="modal-dialog modal-lg" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal" type="button">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">新增投票</h4>
+        </div>
+        <small class="font-bold">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <form class="form-horizontal" enctype="multipart/form-data"
+                                      id="add-vote-form" method="post"
+                                      th:action="@{/admin/vote/add}">
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">投票标题<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" name="title" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">投票描述<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div id="opinion-div" class="form-group">
+                                        <button class="btn btn-info" id="add-opinion-btn" style="margin-left: 100px;"
+                                                type="button">增加选项
+                                        </button>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选项1<span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" name="opinions[0]" required type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选项2<span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" name="opinions[1]" required type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-primary" type="submit">发布投票</button>
+                                            <button class="btn btn-white" data-dismiss="modal" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </small>
+    </div>
+</div>
+<script>
+    var index = 2;
+    $(function () {
+        //表单验证
+        $("#add-vote-form").validate({
+            rules: {
+                title: "required",
+                description: "required"
+            }, messages: {
+                title: "请填写投票标题",
+                description: "请填写投票描述"
+            }
+        });
+
+
+        //增加选项按钮点击
+        $("#add-opinion-btn").click(function () {
+            var div = '                                   <div class="form-group">' +
+                '                                            <label class="col-sm-2 control-label">选项'+(index+1)+'<span class="text-danger">*</span></label>\n' +
+                '                                            <div class="col-sm-8">' +
+                '                                                <input required type="text" class="form-control" name="opinions['+index+']"/>' +
+                '                                            </div>\n' +
+                '                                            <div class="col-sm-2">\n' +
+                '                                                <button onclick="remove(this)" class="btn btn-danger remove-opinion-btn" type="button">删除</button>\n' +
+                '                                            </div>\n' +
+                '                                        </div>';
+            // $(div).find('button').click(function(){
+            //     alert('点了删除按钮！');
+            // });
+            $("#opinion-div").append($(div));
+            index++;
+        });
+
+
+    });
+
+    //删除按钮点击
+    function remove(btn){
+        $(btn).parent().parent().remove();
+        index--;
+    }
+</script>
