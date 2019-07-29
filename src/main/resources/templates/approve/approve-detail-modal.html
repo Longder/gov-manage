@@ -5,7 +5,7 @@
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">Close</span>
             </button>
-            <h4 class="modal-title">审批详情</h4>
+            <h4 class="modal-title">审批情况</h4>
         </div>
         <small class="font-bold">
             <div class="modal-body">
@@ -22,7 +22,7 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="home">
-                                            <form id="approve-form" method="post" class="form-horizontal" th:action="@{/admin/approve/addOpinion}" style="margin-top: 30px;">
+                                            <form method="post" class="form-horizontal"style="margin-top: 30px;">
                                                 <input type="hidden" name="approveApplyId" th:value="${apply.id}"/>
                                                 <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
@@ -47,15 +47,8 @@
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-2 control-label">填写审批意见</label>
-                                                    <div class="col-sm-10">
-                                                        <textarea name="opinion" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-4 col-sm-offset-2">
-                                                        <button class="btn btn-primary" type="submit">保存意见</button>
-                                                        <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
+                                                        <button class="btn btn-white" type="button" data-dismiss="modal">关闭</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -71,11 +64,11 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr th:each="opinion:${opinionList}">
-                                                        <td th:text="${opinion.opinion}"></td>
-                                                        <td th:text="${opinion.approveUser.name}"></td>
-                                                        <td th:text="${opinion.fillTime}"></td>
-                                                    </tr>
+                                                <tr th:each="opinion:${opinionList}">
+                                                    <td th:text="${opinion.opinion}"></td>
+                                                    <td th:text="${opinion.approveUser.name}"></td>
+                                                    <td th:text="${opinion.fillTime}"></td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -89,15 +82,3 @@
         </small>
     </div>
 </div>
-<script>
-    $(function () {
-        //表单验证
-        $("#approve-form").validate({
-            rules:{
-                opinion:"required"
-            },messages:{
-                opinion:"请填写审批意见"
-            }
-        });
-    });
-</script>

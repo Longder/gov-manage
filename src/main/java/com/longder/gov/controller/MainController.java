@@ -1,8 +1,12 @@
 package com.longder.gov.controller;
 
+import com.longder.gov.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Objects;
 
 @Controller
 @Slf4j
@@ -36,8 +40,9 @@ public class MainController {
      * @return
      */
     @GetMapping("/admin/index")
-    public String adminIndex() {
+    public String adminIndex(Model model) {
         log.debug("去后台主页");
+        model.addAttribute("user", Objects.requireNonNull(SecurityUtil.getCurrentUser()).getName());
         return "index";
     }
 

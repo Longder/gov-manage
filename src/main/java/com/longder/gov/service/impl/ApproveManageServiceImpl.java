@@ -8,6 +8,7 @@ import com.longder.gov.repository.ApproveApplyRepository;
 import com.longder.gov.repository.ApproveOpinionRepository;
 import com.longder.gov.security.SecurityUtil;
 import com.longder.gov.service.ApproveManageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,13 @@ public class ApproveManageServiceImpl implements ApproveManageService {
     private ApproveApplyRepository approveApplyRepository;
     @Resource
     private ApproveOpinionRepository approveOpinionRepository;
+
+    /**
+     * 默认上传路径
+     */
+    @Value("${system.upload-path}")
+    private String defaultPath;
+
     /**
      * 添加一个审批申请
      *
@@ -108,6 +116,18 @@ public class ApproveManageServiceImpl implements ApproveManageService {
         return approveOpinionRepository.listByApplyId(approveApplyId);
     }
 
+    /**
+     * 完成审批
+     *
+     * @param approveApplyId
+     */
+    @Override
+    @Transactional
+    public void completeApprove(Long approveApplyId) {
+        ApproveApply approveApply = approveApplyRepository.getOne(approveApplyId);
+        approveApply.setApproveState(ApproveState.FINISHED);
+        approveApplyRepository.save(approveApply);
+    }
 
     /**
      * 存储文件，返回文件路径
@@ -115,8 +135,7 @@ public class ApproveManageServiceImpl implements ApproveManageService {
      * @return
      */
     private String storeFile(MultipartFile multipartFile,Long id){
-        String basePath = this.getClass().getClassLoader().getResource("").getPath()+"/upload";
-        String filePath = basePath+File.separator + id+"_"+multipartFile.getOriginalFilename();
+        String filePath = defaultPath+File.separator + id+"_"+multipartFile.getOriginalFilename();
         File desFile = new File(filePath);
         if(!desFile.getParentFile().exists()){
             desFile.mkdirs();

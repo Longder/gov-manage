@@ -45,7 +45,7 @@
                         <th>登陆名</th>
                         <th>角色</th>
                         <th>所属部门</th>
-                        <th>操作</th>
+<!--                        <th>操作</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -55,17 +55,17 @@
                         <td th:text="${user.loginName}"></td>
                         <td th:text="${user.role.displayName}"></td>
                         <td th:text="${user.department.name}"></td>
-                        <td>
+<!--                        <td>-->
                             <!--                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"-->
                             <!--                                            data-target="#userModal"-->
                             <!--                                            onclick="openModal('${ctx}/student/toUpdate?studentId=${student.id}','studentModal')">-->
                             <!--                                        修改-->
                             <!--                                    </button>-->
-                            <a class="btn btn-sm btn-danger" onclick="return confirm('确定删除吗？')"
-                               th:href="@{/admin/user/deleteUser(userId=${user.id})}">
-                                删除
-                            </a>
-                        </td>
+<!--                            <a class="btn btn-sm btn-danger" onclick="return confirm('确定删除吗？')"-->
+<!--                               th:href="@{/admin/user/deleteUser(userId=${user.id})}">-->
+<!--                                删除-->
+<!--                            </a>-->
+<!--                        </td>-->
                     </tr>
                     </tbody>
                 </table>

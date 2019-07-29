@@ -52,12 +52,17 @@
                         <td th:text="${approve.content}"></td>
                         <td th:text="${approve.approveState.displayName}"></td>
                         <td>
-                            <input type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                            <input th:if="${approve.approveState.name!='FINISHED'}" type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                    data-target="#approveModal"
                                    data-backdrop="static"
                                    th:onclick="'javascript:openModal(\'/admin/approve/toApprove?approveApplyId='+${approve.id}+'\',\'approveModal\')'"
                                    value="填写意见"/>
-                            <input type="button" class="btn btn-danger btn-sm" value="完成审批"/>
+                            <a th:if="${approve.approveState.name!='FINISHED'}" type="button" class="btn btn-danger btn-sm" th:href="@{/admin/approve/complete(approveApplyId=${approve.id})}" onclick="return confirm('确定完成审批吗？')">完成审批</a>
+                            <input th:if="${approve.approveState.name=='FINISHED'}" type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                   data-target="#approveModal"
+                                   data-backdrop="static"
+                                   th:onclick="'javascript:openModal(\'/admin/approve/detail?approveApplyId='+${approve.id}+'\',\'approveModal\')'"
+                                   value="详情"/>
                         </td>
                     </tr>
                     </tbody>
@@ -70,5 +75,8 @@
 <div class="modal inmodal fade" id="approveModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
+<script>
+
+</script>
 </body>
 </html>

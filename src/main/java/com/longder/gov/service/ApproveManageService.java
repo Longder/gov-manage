@@ -42,4 +42,10 @@ public interface ApproveManageService {
     void addOneApproveOpinion(ApproveOpinion approveOpinion);
 
     List<ApproveOpinion> listOpinionsForApply(Long approveApplyId);
+
+    /**
+     * 完成审批
+     * @param approveApplyId
+     */
+    void completeApprove(Long approveApplyId);
 }

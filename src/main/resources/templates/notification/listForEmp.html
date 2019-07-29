@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>我的审批</h5>
+                <h5>我的部门通知</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -24,13 +24,6 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="col-sm-3">
-                        <span class="input-group-btn">
-                        <input type="button" class="btn btn-success" data-toggle="modal"
-                               data-target="#approveModal"
-                               data-backdrop="static"
-                               onclick="openModal('/admin/approve/toAdd','approveModal')"
-                               value="新增审批"/>
-                        </span>
                         </div>
                     </div>
                     <div class="col-sm-9"></div>
@@ -40,34 +33,42 @@
                     <tr>
                         <th>序号</th>
                         <th>标题</th>
+                        <th>发布时间</th>
                         <th>内容</th>
-                        <th>审批状态</th>
+                        <th>状态</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="approve:${list}">
-                        <td th:text="${approveStat.index+1}"></td>
-                        <td th:text="${approve.title}"></td>
-                        <td th:text="${approve.content}"></td>
-                        <td th:text="${approve.approveState.displayName}"></td>
+                    <tr th:each="notification:${list}">
+                        <td th:text="${notificationStat.index+1}"></td>
+                        <td th:text="${notification.title}"></td>
+                        <td th:text="${notification.notifyTime}"></td>
+                        <td th:text="${notification.content}"></td>
                         <td>
-                            <input type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                   data-target="#approveModal"
-                                   data-backdrop="static"
-                                   th:onclick="'javascript:openModal(\'/admin/approve/detail?approveApplyId='+${approve.id}+'\',\'approveModal\')'"
+                            <span th:if="${!notification.hasRead}" class="label label-danger">未读</span>
+                            <span th:if="${notification.hasRead}" class="label label-primary">已读</span>
+                        </td>
+                        <td>
+                            <input class="btn btn-info btn-sm" data-backdrop="static"
+                                   th:if="${!notification.hasRead}"
+                                   data-target="#notificationModal" data-toggle="modal"
+                                   th:onclick="'javascript:openModal(\'/admin/notification/detailForEmp?notificationId='+${notification.id}+'\',\'notificationModal\')'"
+                                   type="button"
                                    value="详情"/>
                         </td>
                     </tr>
                     </tbody>
-
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="modal inmodal fade" id="approveModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div aria-hidden="true" class="modal inmodal fade" id="notificationModal" role="dialog" tabindex="-1"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
+<script>
+
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>我的审批</h5>
+                <h5>部门会议</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -24,13 +24,12 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="col-sm-3">
-                        <span class="input-group-btn">
-                        <input type="button" class="btn btn-success" data-toggle="modal"
-                               data-target="#approveModal"
-                               data-backdrop="static"
-                               onclick="openModal('/admin/approve/toAdd','approveModal')"
-                               value="新增审批"/>
-                        </span>
+                            <span class="input-group-btn">
+                                <input class="btn btn-success"
+                                       data-backdrop="static" data-target="#meetingModal"
+                                       data-toggle="modal" onclick="openModal('/admin/meeting/toAdd','meetingModal')"
+                                       type="button" value="发布会议"/>
+                            </span>
                         </div>
                     </div>
                     <div class="col-sm-9"></div>
@@ -39,35 +38,39 @@
                     <thead>
                     <tr>
                         <th>序号</th>
-                        <th>标题</th>
-                        <th>内容</th>
-                        <th>审批状态</th>
+                        <th>会议主题</th>
+                        <th>会议时间</th>
+                        <th>参会地点</th>
+                        <th>总结状态</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="approve:${list}">
-                        <td th:text="${approveStat.index+1}"></td>
-                        <td th:text="${approve.title}"></td>
-                        <td th:text="${approve.content}"></td>
-                        <td th:text="${approve.approveState.displayName}"></td>
+                    <tr th:each="meeting:${list}">
+                        <td th:text="${meetingStat.index+1}"></td>
+                        <td th:text="${meeting.title}"></td>
+                        <td th:text="${meeting.meetingTime}"></td>
+                        <td th:text="${meeting.place}"></td>
+                        <td th:text="${meeting.summarized}"></td>
                         <td>
-                            <input type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                   data-target="#approveModal"
-                                   data-backdrop="static"
-                                   th:onclick="'javascript:openModal(\'/admin/approve/detail?approveApplyId='+${approve.id}+'\',\'approveModal\')'"
+                            <input class="btn btn-info btn-sm" data-backdrop="static"
+                                   data-target="#meetingModal" data-toggle="modal"
+                                   th:onclick="'javascript:openModal(\'/admin/meeting/detail?meetingId='+${meeting.id}+'\',\'meetingModal\')'"
+                                   type="button"
                                    value="详情"/>
                         </td>
                     </tr>
                     </tbody>
-
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="modal inmodal fade" id="approveModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div aria-hidden="true" class="modal inmodal fade" id="meetingModal" role="dialog" tabindex="-1"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
+<script>
+
+</script>
 </body>
 </html>

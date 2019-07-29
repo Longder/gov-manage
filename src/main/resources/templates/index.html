@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--引入统一头-->
 <head th:include="import/head :: head"></head>
+<title>政务办公系统</title>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
     <!--左侧导航开始-->
@@ -17,7 +18,7 @@
                                 <span class="clear">
                                <span class="block m-t-xs">
                                    <strong class="font-bold">
-                                   您好！
+                                   您好！<span th:text="${user}"></span>
                                    </strong>
                                </span>
                                 </span>
@@ -41,7 +42,7 @@
                 </li>
                 <li sec:authorize="hasRole('ROLE_LEADER')">
                     <a class="J_menuItem" th:href="@{/admin/approve/listForDept}" title="部门审批">
-                        <i class="fa fa-car"></i>
+                        <i class="fa fa-file-archive-o"></i>
                         <span class="nav-label">部门审批</span>
                     </a>
                 </li>
@@ -49,6 +50,36 @@
                     <a class="J_menuItem" th:href="@{/admin/approve/listForEmp}" title="我的审批">
                         <i class="fa fa-file-archive-o"></i>
                         <span class="nav-label">我的审批</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_LEADER')">
+                    <a class="J_menuItem" th:href="@{/admin/notification/listForDept}" title="部门通知">
+                        <i class="fa fa-bars"></i>
+                        <span class="nav-label">部门通知</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                    <a class="J_menuItem" th:href="@{/admin/notification/listForEmp}" title="部门通知">
+                        <i class="fa fa-bars"></i>
+                        <span class="nav-label">部门通知</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_LEADER')">
+                    <a class="J_menuItem" th:href="@{/admin/meeting/listForDept}" title="部门会议">
+                        <i class="fa fa-book"></i>
+                        <span class="nav-label">部门会议</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                    <a class="J_menuItem" th:href="@{/admin/meeting/listForEmp}" title="部门会议">
+                        <i class="fa fa-book"></i>
+                        <span class="nav-label">部门会议</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                    <a class="J_menuItem" th:href="@{/admin/vote/list}" title="部门内部投票">
+                        <i class="fa fa-book"></i>
+                        <span class="nav-label">部门内部投票</span>
                     </a>
                 </li>
             </ul>
@@ -64,7 +95,7 @@
                         <i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post">
                         <div class="form-group">
-                            <h1>政务办公OA</h1>
+                            <h1>政务办公系统</h1>
                         </div>
                     </form>
                 </div>
@@ -89,11 +120,11 @@
                     <li class="J_tabCloseOther"><a>关闭其他</a>
                     </li>
                 </ul>
-                <a id="changePasswordButton" type="button" class="roll-nav roll-right J_tabExit" data-toggle="modal"
-                   data-target="#editPasswordModal"
-                   onclick="openModal('/admin/user/toChangePassword','editPasswordModal')">
-                    修改密码
-                </a>
+<!--                <a id="changePasswordButton" type="button" class="roll-nav roll-right J_tabExit" data-toggle="modal"-->
+<!--                   data-target="#editPasswordModal"-->
+<!--                   onclick="openModal('/admin/user/toChangePassword','editPasswordModal')">-->
+<!--                    修改密码-->
+<!--                </a>-->
             </div>
             <a href="/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
