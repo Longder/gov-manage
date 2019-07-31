@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -54,12 +55,24 @@ public class UserManageController {
         return "redirect:list";
     }
 
-//    /**
-//     * 处理角色枚举的传递封装问题
-//     * @param webDataBinder
-//     */
-//    @InitBinder
-//    public void initBinder(final WebDataBinder webDataBinder) {
-//        webDataBinder.registerCustomEditor(SysRole.class, new SysRoleConverter());
-//    }
+
+    /**
+     * 去修改密码页
+     * @return
+     */
+    @RequestMapping("/toChangePassword")
+    public String toChangePassword(){
+        return "user/change-password-modal";
+    }
+
+    /**
+     * 修改密码
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/changePassword")
+    public String changePassword(String password){
+        userManageService.changePassword(password);
+        return "ok";
+    }
 }

@@ -41,9 +41,9 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_LEADER')">
-                    <a class="J_menuItem" th:href="@{/admin/approve/listForDept}" title="部门审批">
+                    <a class="J_menuItem" th:href="@{/admin/approve/listForDept}" title="文件审批管理">
                         <i class="fa fa-file-archive-o"></i>
-                        <span class="nav-label">部门审批</span>
+                        <span class="nav-label">文件审批管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
@@ -53,41 +53,83 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_LEADER')">
-                    <a class="J_menuItem" th:href="@{/admin/notification/listForDept}" title="部门通知">
+                    <a class="J_menuItem" th:href="@{/admin/notification/listForDept}" title="通知公告管理">
                         <i class="fa fa-bars"></i>
-                        <span class="nav-label">部门通知</span>
+                        <span class="nav-label">通知公告管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
-                    <a class="J_menuItem" th:href="@{/admin/notification/listForEmp}" title="部门通知">
+                    <a class="J_menuItem" th:href="@{/admin/notification/listForEmp}" title="通知公告管理">
                         <i class="fa fa-bars"></i>
-                        <span class="nav-label">部门通知</span>
+                        <span class="nav-label">通知公告管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_LEADER')">
-                    <a class="J_menuItem" th:href="@{/admin/meeting/listForDept}" title="部门会议">
+                    <a class="J_menuItem" th:href="@{/admin/meeting/listForDept}" title="会议管理">
                         <i class="fa fa-book"></i>
-                        <span class="nav-label">部门会议</span>
+                        <span class="nav-label">会议管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
-                    <a class="J_menuItem" th:href="@{/admin/meeting/listForEmp}" title="部门会议">
+                    <a class="J_menuItem" th:href="@{/admin/meeting/listForEmp}" title="会议管理">
                         <i class="fa fa-book"></i>
-                        <span class="nav-label">部门会议</span>
+                        <span class="nav-label">会议管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
-                    <a class="J_menuItem" th:href="@{/admin/vote/list}" title="部门内部投票">
-                        <i class="fa fa-book"></i>
-                        <span class="nav-label">部门内部投票</span>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">办公室管理</span>
+                        <span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level collapse" aria-expanded="true" style="">
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/vote/list}" title="投票管理" data-index="0">投票管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/doc/list}" title="文档中心" data-index="5">文档中心</a>
+                        </li>
+                    </ul>
                 </li>
                 <li sec:authorize="hasRole('ROLE_LEADER')">
-                    <a class="J_menuItem" th:href="@{/admin/vote/list}" title="部门内部投票">
-                        <i class="fa fa-book"></i>
-                        <span class="nav-label">部门内部投票</span>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">办公室管理</span>
+                        <span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level collapse in" aria-expanded="true" style="">
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/vote/list}" title="投票管理" data-index="0">投票管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/doc/list}" title="文档中心" data-index="5">文档中心</a>
+                        </li>
+                    </ul>
                 </li>
+<!--                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">-->
+<!--                    <a class="J_menuItem" th:href="@{/admin/vote/list}" title="投票管理">-->
+<!--                        <i class="fa fa-bar-chart"></i>-->
+<!--                        <span class="nav-label">投票管理</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="hasRole('ROLE_LEADER')">-->
+<!--                    <a class="J_menuItem" th:href="@{/admin/vote/list}" title="投票管理">-->
+<!--                        <i class="fa fa-bar-chart"></i>-->
+<!--                        <span class="nav-label">投票管理</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="hasRole('ROLE_LEADER')">-->
+<!--                    <a class="J_menuItem" th:href="@{/admin/doc/list}" title="文档中心">-->
+<!--                        <i class="fa fa-folder"></i>-->
+<!--                        <span class="nav-label">文档中心</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">-->
+<!--                    <a class="J_menuItem" th:href="@{/admin/doc/list}" title="文档中心">-->
+<!--                        <i class="fa fa-folder"></i>-->
+<!--                        <span class="nav-label">文档中心</span>-->
+<!--                    </a>-->
+<!--                </li>-->
             </ul>
         </div>
     </nav>
@@ -126,11 +168,11 @@
                     <li class="J_tabCloseOther"><a>关闭其他</a>
                     </li>
                 </ul>
-<!--                <a id="changePasswordButton" type="button" class="roll-nav roll-right J_tabExit" data-toggle="modal"-->
-<!--                   data-target="#editPasswordModal"-->
-<!--                   onclick="openModal('/admin/user/toChangePassword','editPasswordModal')">-->
-<!--                    修改密码-->
-<!--                </a>-->
+                <a id="changePasswordButton" type="button" class="roll-nav roll-right J_tabExit" data-toggle="modal"
+                   data-target="#editPasswordModal"
+                   onclick="openModal('/admin/user/toChangePassword','editPasswordModal')">
+                    修改密码
+                </a>
             </div>
             <a href="/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>

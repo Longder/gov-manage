@@ -16,4 +16,11 @@ public interface UserManageService {
      * @return
      */
     List<SysUser> listAll();
+
+
+    /**
+     * 修改密码
+     * @param newPassword
+     */
+    void changePassword(String newPassword);
 }

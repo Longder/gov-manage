@@ -11,6 +11,7 @@ import com.longder.gov.service.ApproveManageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -46,12 +47,17 @@ public class ApproveManageServiceImpl implements ApproveManageService {
         approveApply.setApplyUser(currentUser);
         assert currentUser != null;
         approveApply.setDepartment(currentUser.getDepartment());
-        approveApply.setFileName(approveApply.getFile().getOriginalFilename());
         approveApply.setApproveState(ApproveState.WAITING);
         approveApplyRepository.save(approveApply);
         //处理文件
-        String filePath = storeFile(approveApply.getFile(),approveApply.getId());
-        approveApply.setFilePath(filePath);
+        if(!approveApply.getFile().isEmpty()){
+            approveApply.setFileName(approveApply.getFile().getOriginalFilename());
+            String filePath = storeFile(approveApply.getFile(),approveApply.getId());
+            approveApply.setFilePath(filePath);
+        }else{
+            approveApply.setFileName(null);
+            approveApply.setFilePath(null);
+        }
         approveApplyRepository.save(approveApply);
     }
 

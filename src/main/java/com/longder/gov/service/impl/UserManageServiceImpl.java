@@ -4,6 +4,7 @@ import com.longder.gov.entity.po.SysUser;
 import com.longder.gov.entity.po.SysUserRole;
 import com.longder.gov.repository.SysUserRepository;
 import com.longder.gov.repository.SysUserRoleRepository;
+import com.longder.gov.security.SecurityUtil;
 import com.longder.gov.service.UserManageService;
 import com.longder.gov.util.EncryptionUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -59,5 +60,18 @@ public class UserManageServiceImpl implements UserManageService {
         //移除管理员
         userList.removeIf(sysUser -> ObjectUtils.isEmpty(sysUser.getDepartment()));
         return userList;
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param newPassword
+     */
+    @Override
+    public void changePassword(String newPassword) {
+        SysUser currentUser = SecurityUtil.getCurrentUser();
+        assert currentUser != null;
+        currentUser.setPassword(EncryptionUtil.encrypt(newPassword.trim()));
+        sysUserRepository.save(currentUser);
     }
 }
